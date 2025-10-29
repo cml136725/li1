@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温馨小提示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        .tip-window {
+            position: absolute;
+            width: 180px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            padding: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const tips = [
+            '多喝水哦~', '保持微笑呀', '每天都要元气满满',
+            '记得吃水果', '保持好心情', '好好爱自己', '我想你了',
+            '梦想成真', '期待下一次见面', '金榜题名',
+            '顺顺利利', '早点休息', '愿所有烦恼都消失',
+            '别熬夜', '今天过得开心嘛', '天冷了，多穿衣服'
+        ];
+
+        const colors = [
+            'lightpink', 'skyblue', 'lightgreen', 'lavender',
+            'lightyellow', 'plum', 'coral', 'bisque', 'aquamarine',
+            'mistyrose', 'honeydew', 'lavenderblush', 'oldlace'
+        ];
+
+        function createTipWindow() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            const tip = tips[Math.floor(Math.random() * tips.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            const windowWidth = 150;
+            const windowHeight = 30;
+
+            const x = Math.random() * (screenWidth - windowWidth);
+            const y = Math.random() * (screenHeight - windowHeight);
+
+            const tipWindow = document.createElement('div');
+            tipWindow.className = 'tip-window';
+            tipWindow.textContent = tip;
+            tipWindow.style.backgroundColor = color;
+            tipWindow.style.left = `${x}px`;
+            tipWindow.style.top = `${y}px`;
+
+            tipWindow.addEventListener('click', () => {
+                document.body.removeChild(tipWindow);
+            });
+
+            document.body.appendChild(tipWindow);
+        }
+
+        // 创建多个提示窗口
+        for (let i = 0; i < 100; i++) {
+            setTimeout(createTipWindow, i * 100);
+        }
+
+        // 点击空白处创建新提示
+        document.addEventListener('click', (e) => {
+            if (e.target === document.body) {
+                createTipWindow();
+            }
+        });
+    </script>
+</body>
+</html>
